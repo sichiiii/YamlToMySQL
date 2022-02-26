@@ -1,0 +1,32 @@
+CREATE TABLE toys(   #1
+    toy_id INT NOT NULL,
+    name VARCHAR(80),
+    status VARCHAR(20),
+    status_updated DATE, 
+    PRIMARY KEY(toy_id)
+);
+
+CREATE TABLE games(
+    game_id INT NOT NULL,
+    name VARCHAR(80),
+    date DATE, 
+    PRIMARY KEY(game_id)
+);
+CREATE TABLE toys_games(
+    id INT NOT NULL,
+    game_id INT NOT NULL,
+    toy_id INT NOT NULL,
+    note VARCHAR(80),
+    FOREIGN KEY (game_id) REFERENCES games(game_id),
+    FOREIGN KEY (toy_id) REFERENCES  toys(toy_id),
+    PRIMARY KEY(note)
+);
+
+CREATE TABLE toys_repair(  #2
+    id INT NOT NULL,
+    toy_id INT NOT NULL,
+    issue_description VARCHAR(80),
+    PRIMARY KEY(toy_id),
+    FOREIGN KEY (toy_id) REFERENCES  toys(toy_id),
+    FOREIGN KEY (issue_description) REFERENCES  toys_games(note)
+);
